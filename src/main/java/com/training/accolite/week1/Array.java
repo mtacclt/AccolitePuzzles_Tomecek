@@ -27,29 +27,49 @@ public class Array {
 		System.out.println(result);
 		return result;
 	}
- 
-    
-    
-    
+
+
+
+
     int solve() {
         int n = sc.nextInt();
         int m = sc.nextInt();
-        
+
         int[] a = new int[2*n+1];
         for (int i = 1; i <= n; i++) {
             a[i] = sc.nextInt();
             a[i+n] = a[i];
         }
-        
+
         int[] b = new int[maxn];
         for (int i = 1; i <= m; i++) {
             b[sc.nextInt()] = i;
         }
-        
+
         int ans = 0;
-        
-        // Write the logic here
-        
+        int count = 0;
+        int sequence =0;
+
+        for (int i = 0; i < a.length; i++) {
+            for (int j = i; j < i + n && j < a.length; j++) {
+                if (b[a[j]] == 0){
+                    break;
+                }
+                if(b[a[j]] != 0 && b[a[j]] > sequence){
+                    count++;
+                }
+
+                if (b[a[j]] !=0){
+                    sequence++;
+                }
+            }
+            if (ans <= count){
+                ans =  count;
+            }
+            count = 0;
+            sequence = 0;
+        }
+
         return ans;
     }
 

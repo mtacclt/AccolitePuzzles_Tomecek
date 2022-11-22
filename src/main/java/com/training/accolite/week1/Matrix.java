@@ -8,7 +8,21 @@ public class Matrix {
 	private final Scanner sc;
 	
 	public int[][] solve(int[][] A) {
-	    // Write logic here...
+	    int[][] newCells = new int[A.length][A[0].length];
+		for (int i=0;i< newCells.length;i++){
+			for (int j=0;j<newCells[i].length;j++){
+				int cellsAlive = count(A,i,j, newCells.length, newCells[i].length);
+
+				if (A[i][j] == 1 && cellsAlive>1 && cellsAlive<4){
+					newCells[i][j] = 1;
+				}else if(A[i][j] == 1 && !(cellsAlive<1 ||  cellsAlive>4)) {
+					newCells[i][j] = 0;
+				}else if(A[i][j] == 0 && cellsAlive == 3){
+					newCells[i][j] = 1;
+				}
+			}
+		}
+		return newCells;
 	}
 
 	int dis[][]={{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};
